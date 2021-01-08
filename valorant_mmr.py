@@ -18,11 +18,11 @@ map_names = {
 
 def get_cookies(username, password):
     data = {
-    'client_id': 'play-valorant-web-prod',
-    'nonce': '1',
-    'redirect_uri': 'https://playvalorant.com/',
-    'response_type': 'token id_token',
-      'scope': 'account openid',
+        'client_id': 'play-valorant-web-prod',
+        'nonce': '1',
+        'redirect_uri': 'https://playvalorant.com/',
+        'response_type': 'token id_token',
+        'scope': 'account openid',
     }
     headers = {
         'Content-Type': 'application/json'
