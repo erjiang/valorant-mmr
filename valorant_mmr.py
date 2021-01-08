@@ -109,7 +109,8 @@ def get_match_history(user_id, access_token, entitlements_token, cookie_jar):
 def show_history(match_data):
     print("Old MMR\tNew MMR\tChange\tMap\tTimestamp")
     for match in match_data['Matches']:
-        if match['CompetitiveMovement'] == 'MOVEMENT_UNKNOWN':
+        if match['TierAfterUpdate'] == 0 and match['TierBeforeUpdate'] == 0:
+            # must be unrated ...
             continue
         if match['MapID'] in map_names:
             map_name = map_names[match['MapID']]
@@ -122,7 +123,7 @@ def show_history(match_data):
         elo_after = match['TierAfterUpdate'] * 100 + match['TierProgressAfterUpdate']
         elo_diff = elo_after - elo_before
 
-        print("%d\t%d\t%d\t%s\t%s" % (elo_before, elo_after, elo_diff, map_name, match_timestamp))
+        print("%d\t%d\t%d\t%s\t%s\t%s" % (elo_before, elo_after, elo_diff, map_name, match_timestamp, match['CompetitiveMovement']))
 
 
 def main():
