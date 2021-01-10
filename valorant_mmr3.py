@@ -120,7 +120,10 @@ def show_history(match_data):
         elo_after = match['TierAfterUpdate'] * 100 + match['TierProgressAfterUpdate']
         elo_diff = elo_after - elo_before
 
-        print("%d\t%d\t%d\t%s\t%s\t%s" % (elo_before, elo_after, elo_diff, map_name, match_timestamp, match['CompetitiveMovement']))
+        print("%d.%02d\t%d.%02d\t%d\t%s\t%s\t%s" % (
+            match['TierBeforeUpdate'], match['TierProgressBeforeUpdate'],
+            match['TierAfterUpdate'], match['TierProgressAfterUpdate'],
+            elo_diff, map_name, match_timestamp, match['CompetitiveMovement']))
 
 
 def main():
