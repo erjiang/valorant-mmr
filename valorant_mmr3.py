@@ -127,7 +127,8 @@ def show_history(match_data):
 
 
 def main():
-    username = input('Username: ')
+    sys.stderr.write('Username: ')
+    username = input()
     password = getpass.getpass('Password: ')
     cookie_jar = get_cookies(username, password)
     access_token = get_access_token(username, password, cookie_jar)
