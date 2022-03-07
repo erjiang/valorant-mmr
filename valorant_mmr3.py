@@ -7,6 +7,7 @@ import sys
 import time
 import urllib.parse
 import urllib.request, urllib.error, urllib.parse
+import traceback
 
 map_names = {
     '/Game/Maps/Duality/Duality': 'bind',
@@ -125,18 +126,20 @@ def show_history(match_data):
             match['TierAfterUpdate'], match['TierProgressAfterUpdate'],
             elo_diff, map_name, match_timestamp, match['CompetitiveMovement']))
 
-
 def main():
-    sys.stderr.write('Username: ')
-    username = input()
-    password = getpass.getpass('Password: ')
-    cookie_jar = get_cookies(username, password)
-    access_token = get_access_token(username, password, cookie_jar)
-    entitlements_token = get_entitlements_token(access_token, cookie_jar)
-    user_id, handle = get_user_info(access_token, cookie_jar)
-    print("Data for: " + handle)
-    match_history = get_match_history(user_id, access_token, entitlements_token, cookie_jar)
-    show_history(match_history)
+    try:
+        sys.stderr.write('Username: ')
+        username = input()
+        password = getpass.getpass('Password: ')
+        cookie_jar = get_cookies(username, password)
+        access_token = get_access_token(username, password, cookie_jar)
+        entitlements_token = get_entitlements_token(access_token, cookie_jar)
+        user_id, handle = get_user_info(access_token, cookie_jar)
+        print("Data for: " + handle)
+        match_history = get_match_history(user_id, access_token, entitlements_token, cookie_jar)
+        show_history(match_history)
+    except Exception:
+        traceback.print_exc()
 
 
 if __name__ == '__main__':
